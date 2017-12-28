@@ -9,7 +9,7 @@ public class TTransaction {
     private int TransactionNumber;
     private int Quantity = 0;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "transactions")
     private List<Product> Products = new LinkedList<>();
 
     public TTransaction(){}

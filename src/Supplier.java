@@ -11,7 +11,7 @@ public class Supplier {
     private String Street;
     private String City;
 
-    @OneToMany(mappedBy = "supplier")
+    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private Set<Product> SupplyingProducts = new HashSet<>();
 
     public Supplier(){

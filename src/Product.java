@@ -20,9 +20,6 @@ public class Product {
     private Supplier supplier;
 
     @ManyToMany
-    @JoinTable(name = "Product_TTransaction",
-                joinColumns = @JoinColumn(name = "Product_ID"),
-                inverseJoinColumns = @JoinColumn(name = "TTransaction_ID"))
     private List<TTransaction> transactions = new LinkedList<>();
 
     public Product(){
