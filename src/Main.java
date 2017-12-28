@@ -42,8 +42,8 @@ public class Main {
             category.addProduct(product2);
             category2.addProduct(product3);
             category2.addProduct(product4);
-            Supplier supplier = new Supplier("Marek", "Krakowska", "Warszawa"),
-                        supplier2 = new Supplier("Darek", "Lwowska", "Tarnów");
+            Supplier supplier = new Supplier("Marek", "Krakowska", "Warszawa", "00-001", "1234567890"),
+                    supplier2 = new Supplier("Darek","Lwowska", "Tarnów", "33-100", "0987654321");
             session.save(supplier);
             session.save(supplier2);
             supplier.addSupplyingProduct(product);

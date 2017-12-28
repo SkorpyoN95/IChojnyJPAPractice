@@ -9,7 +9,7 @@ public class TTransaction {
     private int TransactionNumber;
     private int Quantity = 0;
 
-    @ManyToMany(mappedBy = "transactions")
+    @ManyToMany(mappedBy = "transactions", cascade = CascadeType.PERSIST)
     private List<Product> Products = new LinkedList<>();
 
     public TTransaction(){}

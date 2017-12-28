@@ -19,7 +19,7 @@ public class Product {
     @JoinColumn
     private Supplier supplier;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<TTransaction> transactions = new LinkedList<>();
 
     public Product(){

@@ -17,57 +17,39 @@ public class Main2 {
                 product2 = new Product("Vodka", 5),
                 product3 = new Product("Bread", 15),
                 product4 = new Product("Bun", 20);
-        em.persist(product);
-        em.persist(product2);
-        em.persist(product3);
-        em.persist(product4);
         category.addProduct(product);
         category.addProduct(product2);
         category2.addProduct(product3);
         category2.addProduct(product4);
-        Supplier supplier = new Supplier("Marek", "Krakowska", "Warszawa"),
-                supplier2 = new Supplier("Darek", "Lwowska", "Tarnów");
+        Supplier supplier = new Supplier("Marek", "Krakowska", "Warszawa", "00-001", "1234567890"),
+                supplier2 = new Supplier("Darek","Lwowska", "Tarnów", "33-100", "0987654321"),
+                supplier3 = new Supplier("Jarek", "Reymonta", "Kraków", "02-456", "1357924680"),
+                supplier4 = new Supplier("Czarek", "Pomorska", "Gdynia", "88-000", "2468013579");
         em.persist(supplier);
         em.persist(supplier2);
+        em.persist(supplier3);
+        em.persist(supplier4);
         supplier.addSupplyingProduct(product);
         supplier.addSupplyingProduct(product2);
         supplier2.addSupplyingProduct(product3);
         supplier2.addSupplyingProduct(product4);
-        TTransaction trans1 = new TTransaction(),
-                trans2 = new TTransaction(),
-                trans3 = new TTransaction();
-        em.persist(trans1);
-        em.persist(trans2);
-        em.persist(trans3);
-        trans1.addProduct(product);
-        trans1.addProduct(product);
-        trans1.addProduct(product);
-        trans1.addProduct(product3);
-        trans2.addProduct(product2);
-        trans2.addProduct(product2);
-        trans2.addProduct(product2);
-        trans2.addProduct(product2);
-        trans3.addProduct(product4);
-        trans3.addProduct(product4);
-        trans3.addProduct(product3);
-        trans3.addProduct(product3);
-        trans3.addProduct(product);
+        em.persist(product);
+        em.persist(product2);
+        em.persist(product3);
+        em.persist(product4);
+        Customer customer1 = new Customer("Hyzio", "Krakowska", "Warszawa", "00-001", 5),
+                customer2 = new Customer("Dyzio","Lwowska", "Tarnów", "33-100", 10),
+                customer3 = new Customer("Zyzio", "Reymonta", "Kraków", "02-456", 15);
+        em.persist(customer1);
+        em.persist(customer2);
+        em.persist(customer3);
 
         etx.commit();
-        Query q = em.createQuery("select prod from Product as prod " +
-                "join prod.transactions as trans where trans = :trans", Product.class).
-                setParameter("trans", trans2);
-        List<Product> l = q.getResultList();
-        for(Product p : l){
-            System.out.println(p);
-        }
-        Query q2 = em.createQuery("select trans from TTransaction as trans " +
-                "join trans.Products as prod where prod = :prod", TTransaction.class).
-                setParameter("prod", product);
-        List<TTransaction> l2 = q2.getResultList();
-        for(TTransaction t : l2){
-            System.out.println(t);
-        }
+
+        TypedQuery<Supplier> q = em.createQuery("select sup from Supplier sup where sup.CompanyName = 'Jarek'", Supplier.class);
+        System.out.println(q.getSingleResult());
+        TypedQuery<Customer> q2 = em.createQuery("select cust from Customer cust where cust.CompanyName = 'Zyzio'", Customer.class);
+        System.out.println(q2.getSingleResult());
         em.close();
 
     }

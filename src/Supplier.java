@@ -3,13 +3,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Supplier {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int SupplierID;
-    private String CompanyName;
-    private String Street;
-    private String City;
+public class Supplier extends Company {
+    private String bankAccountNumber;
 
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL)
     private Set<Product> SupplyingProducts = new HashSet<>();
@@ -18,10 +13,9 @@ public class Supplier {
 
     }
 
-    public Supplier(String companyName, String street, String city) {
-        CompanyName = companyName;
-        Street = street;
-        City = city;
+    public Supplier(String companyName, String street, String city, String zipCode, String account) {
+        super(companyName, street, city, zipCode);
+        bankAccountNumber = account;
     }
 
     public void addSupplyingProduct(Product product){
@@ -31,10 +25,5 @@ public class Supplier {
 
     public Set<Product> getSupplyingProducts(){
         return SupplyingProducts;
-    }
-
-    @Override
-    public String toString(){
-        return CompanyName + " | " + Street + " | " + City;
     }
 }
